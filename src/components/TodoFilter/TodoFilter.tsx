@@ -1,12 +1,14 @@
+import React, { FC, ChangeEvent } from 'react';
+
 type Props = {
-  onFilterChange: (event: React.ChangeEvent<HTMLSelectElement>) => void;
-  onInputChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  onFilterChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  onInputChange: (event: ChangeEvent<HTMLInputElement>) => void;
   onQueryClear: () => void;
   filteringOption: string;
   query: string;
 };
 
-export const TodoFilter: React.FC<Props> = ({
+export const TodoFilter: FC<Props> = ({
   onFilterChange,
   onInputChange,
   onQueryClear,

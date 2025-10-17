@@ -18,6 +18,7 @@ export const TodoModal: React.FC<Props> = ({ todo, onModalCloseClick }) => {
     if (!todo) {
       setLoading(false);
       setUser(null);
+
       return;
     }
 
@@ -25,14 +26,25 @@ export const TodoModal: React.FC<Props> = ({ todo, onModalCloseClick }) => {
     setUser(null);
 
     const ac = new AbortController();
+
     getUser(todo.userId)
-      .then(u => { if (!ac.signal.aborted) setUser(u); })
-      .finally(() => { if (!ac.signal.aborted) setLoading(false); });
+      .then(u => {
+        if (!ac.signal.aborted) {
+          setUser(u);
+        }
+      })
+      .finally(() => {
+        if (!ac.signal.aborted) {
+          setLoading(false);
+        }
+      });
 
     return () => ac.abort();
   }, [todo]);
 
-  if (!todo) return null;
+  if (!todo) {
+    return null;
+  }
 
   return (
     <div className="modal is-active" data-cy="modal">
@@ -80,7 +92,9 @@ export const TodoModal: React.FC<Props> = ({ todo, onModalCloseClick }) => {
           </div>
 
           <footer className="modal-card-foot is-justify-content-flex-end">
-            <button className="button" onClick={onModalCloseClick}>Close</button>
+            <button className="button" onClick={onModalCloseClick}>
+              Close
+            </button>
           </footer>
         </div>
       )}
